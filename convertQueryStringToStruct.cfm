@@ -3,10 +3,10 @@
 	<cfargument name="querystringdelimiter" type="string" required="false" default="&" hint="I am the delimiter of the query string.">
 	<cfargument name="querystringassignmentoperator" type="string" required="false" default="=" hint="I am the assignment operator of the query string.">
 
-	<!--- used to support versions older than ColdFusion 9 --->
-	<cfset var local = {}>
-
-	<cfset local.querystringstruct = {}>
+	<!--- var local used to support versions older than ColdFusion 9 --->
+	<cfset var local = structnew()>
+	<!--- structnew() to support versions older than ColdFusion 7 instead of {} --->
+	<cfset local.querystringstruct = structnew()>
 
 	<cfloop list="#arguments.querystring#" index="local.querystringindex" delimiters="#arguments.querystringdelimiter#">
 		<cfset local.querystringkey = urldecode(listfirst(local.querystringindex,arguments.querystringassignmentoperator))>
