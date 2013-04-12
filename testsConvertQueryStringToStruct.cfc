@@ -2,13 +2,13 @@
 component extends="mxunit.framework.TestCase" {
 	include "convertQueryStringToStruct.cfm";
 
-	function test_Simple(){
+	function Simple(){
 		local.querystringstruct = convertQueryStringToStruct(querystring="a=1");
 		local.teststruct["a"] = ["1"];
 		assertEquals(local.querystringstruct, local.teststruct);
 	}
 
-	function test_DuplicatedParameter(){
+	function DuplicatedParameter(){
 		local.querystringstruct = convertQueryStringToStruct(querystring="a=1,2&b=3&a=4,5");
 		local.testarray = [];
 		arrayappend(local.testarray,"1,2");
@@ -18,33 +18,33 @@ component extends="mxunit.framework.TestCase" {
 		assertEquals(local.querystringstruct, local.teststruct);
 	}
 
-	function test_SingleEmptyStringWithAssignmentOperator(){
+	function SingleEmptyStringWithAssignmentOperator(){
 		local.querystringstruct = convertQueryStringToStruct(querystring="a=");
 		local.teststruct["a"] = [""];
 		assertEquals(local.querystringstruct, local.teststruct);
 	}
 
-	function test_MultipleEmptyStringsWithAssignmentOperator(){
+	function MultipleEmptyStringsWithAssignmentOperator(){
 		local.querystringstruct = convertQueryStringToStruct(querystring="a=&b=");
 		local.teststruct["a"] = [""];
 		local.teststruct["b"] = [""];
 		assertEquals(local.querystringstruct, local.teststruct);
 	}
 
-	function test_MultipleEmptyStringsWithoutAssignmentOperator(){
+	function MultipleEmptyStringsWithoutAssignmentOperator(){
 		local.querystringstruct = convertQueryStringToStruct(querystring="a&b");
 		local.teststruct["a"] = [""];
 		local.teststruct["b"] = [""];
 		assertEquals(local.querystringstruct, local.teststruct);
 	}
 
-	function test_DoubleAssignmentOperator(){
+	function DoubleAssignmentOperator(){
 		local.querystringstruct = convertQueryStringToStruct(querystring="a==");
 		local.teststruct["a"] = ["="];
 		assertEquals(local.querystringstruct, local.teststruct);
 	}
 
-	function test_EncodedUrl(){
+	function EncodedUrl(){
 		local.querystringstruct = convertQueryStringToStruct(querystring="user=john%20doe");
 		local.teststruct["user"] = ["john doe"];
 		assertEquals(local.querystringstruct, local.teststruct);
