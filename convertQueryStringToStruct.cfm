@@ -4,22 +4,22 @@
 	<cfargument name="assignmentOperator" type="string" required="false" default="=" hint="Assignment operator of the query string.">
 
 	<!--- var local used to support versions older than ColdFusion 9 --->
-	<cfset var local = structnew()>
+	<cfset var local = structNew()>
 	<!--- structnew() to support versions older than ColdFusion 7 instead of {} --->
-	<cfset local.queryStringstruct = structnew()>
+	<cfset local.queryStringStruct = structNew()>
 
-	<cfloop list="#arguments.queryString#" index="local.queryStringindex" delimiters="#arguments.delimiters#">
-		<cfset local.queryStringkey = urldecode(listfirst(local.queryStringindex,arguments.assignmentOperator))>
-		<cfif !find(arguments.assignmentOperator,local.queryStringindex)>
-			<cfset local.queryStringvalue = "">
+	<cfloop list="#arguments.queryString#" index="local.queryStringIndex" delimiters="#arguments.delimiters#">
+		<cfset local.queryStringKey = urlDecode(listFirst(local.queryStringIndex,arguments.assignmentOperator))>
+		<cfif !find(arguments.assignmentOperator,local.queryStringIndex)>
+			<cfset local.queryStringValue = "">
 		<cfelse>
-			<cfset local.queryStringvalue = replacenocase(urldecode(listrest(local.queryStringindex,arguments.assignmentOperator,true)),local.queryStringkey & arguments.assignmentOperator,"")>
+			<cfset local.queryStringValue = replaceNoCase(urldecode(listRest(local.queryStringIndex,arguments.assignmentOperator,true)),local.queryStringKey & arguments.assignmentOperator,"")>
 		</cfif>
-		<cfif !structkeyexists(local.queryStringstruct,local.queryStringkey)>
-			<cfset structinsert(local.queryStringstruct,local.queryStringkey,[])>
+		<cfif !structKeyExists(local.queryStringStruct,local.queryStringKey)>
+			<cfset structInsert(local.queryStringStruct,local.queryStringKey,[])>
 		</cfif>
-		<cfset arrayappend(local.queryStringstruct[local.queryStringkey],local.queryStringvalue)>
+		<cfset arrayAppend(local.queryStringStruct[local.queryStringKey],local.queryStringValue)>
 	</cfloop>
 
-	<cfreturn local.queryStringstruct>
+	<cfreturn local.queryStringStruct>
 </cffunction>
