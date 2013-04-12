@@ -1,7 +1,7 @@
-<cffunction name="queryStringToStruct" access="public" returntype="struct" output="false" hint="I accept a url query string and return it as a structure.">
-    <cfargument name="queryString" type="string" required="true" hint="I am the query string for which to parse.">
-	<cfargument name="delimiters" type="string" required="false" default="&" hint="I am the delimiters of the query string.">
-	<cfargument name="assignmentOperator" type="string" required="false" default="=" hint="I am the assignment operator of the query string.">
+<cffunction name="queryStringToStruct" access="public" returntype="struct" output="false" hint="Accepts a url query string and returns it as a structure.">
+    <cfargument name="queryString" type="string" required="true" hint="Query string for which to parse.">
+	<cfargument name="delimiters" type="string" required="false" default="&" hint="Delimiters of the query string.">
+	<cfargument name="assignmentOperator" type="string" required="false" default="=" hint="Assignment operator of the query string.">
 
 	<!--- var local used to support versions older than ColdFusion 9 --->
 	<cfset var local = structnew()>
