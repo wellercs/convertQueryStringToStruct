@@ -1,6 +1,6 @@
 <cffunction name="convertQueryStringToStruct" access="public" returntype="struct" output="false" hint="I accept a url query string and return it as a structure.">
     <cfargument name="querystring" type="string" required="true" hint="I am the query string for which to parse.">
-	<cfargument name="querystringdelimiter" type="string" required="false" default="&" hint="I am the delimiter of the query string.">
+	<cfargument name="querystringdelimiters" type="string" required="false" default="&" hint="I am the delimiters of the query string.">
 	<cfargument name="querystringassignmentoperator" type="string" required="false" default="=" hint="I am the assignment operator of the query string.">
 
 	<!--- var local used to support versions older than ColdFusion 9 --->
@@ -8,7 +8,7 @@
 	<!--- structnew() to support versions older than ColdFusion 7 instead of {} --->
 	<cfset local.querystringstruct = structnew()>
 
-	<cfloop list="#arguments.querystring#" index="local.querystringindex" delimiters="#arguments.querystringdelimiter#">
+	<cfloop list="#arguments.querystring#" index="local.querystringindex" delimiters="#arguments.querystringdelimiters#">
 		<cfset local.querystringkey = urldecode(listfirst(local.querystringindex,arguments.querystringassignmentoperator))>
 		<cfif !find(arguments.querystringassignmentoperator,local.querystringindex)>
 			<cfset local.querystringvalue = "">
