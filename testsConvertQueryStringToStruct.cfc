@@ -1,4 +1,3 @@
-
 component extends="mxunit.framework.TestCase" {
 	
 	include "convertQueryStringToStruct.cfm";
@@ -54,6 +53,5 @@ component extends="mxunit.framework.TestCase" {
 		local.teststruct["user"] = ["john doe"];
 		assertEquals(local.querystringstruct, local.teststruct);
 	}
-
 	
 }
